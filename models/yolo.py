@@ -36,12 +36,14 @@ from models.Bifpn import ASFF_Bifpn_2, ASFF_Bifpn_3
 from models.Bifpn_CA import ASFF_BifpnCA_2, ASFF_BifpnCA_3
 from models.Biadd_CA import ASFF_BiaddCA_2, ASFF_BiaddCA_3
 # from models.AFPN_Bicat import ASFF_bicat_2, ASFF_bicat_3
-from models.CA_improve import ASFF_CAimprove_2, ASFF_CAimprove_3, ASFF_CAimprove_4, Bifusion_1, Bifusion_2
+from models.CA_improve import ASFF_CAimprove_2, ASFF_CAimprove_3, ASFF_CAimprove_4
 from models.EMA import ASFF_EMA_2, ASFF_EMA_3, EMA
 from models.AFPN_4head import ASFF_bicat_2, ASFF_bicat_3, ASFF_bicat_4
 from models.AFPN_Bica_4head import ASFF_bica4_2, ASFF_bica4_3, ASFF_bica4_4
 from models.newCA_afpn import ASFF_newCA_2, ASFF_newCA_3
 from models.ODconv import ODConv
+from models.yolov5s_aufpn_fusion.AUFPN_fusion import AUFPN_fusion_2, AUFPN_fusion_3, AUFPN_fusion_4, Bifusion_1, Bifusion_2
+from models.yolov5s_afpn.AFPN_4head import BasicBlock, BasicBlock_n, ASFF_2, ASFF_3, ASFF_4
 
 try:
     import thop  # for FLOPs computation
@@ -372,7 +374,8 @@ def parse_model(d, ch):  # model_dict, input_channels(3)
                    ASFF_EMA_2, ASFF_EMA_3,
                    ASFF_CAimprove_2, ASFF_CAimprove_3, ASFF_CAimprove_4,
                    ASFF_bica4_2, ASFF_bica4_3, ASFF_bica4_4,
-                   ASFF_newCA_2, ASFF_newCA_3}:   # afpn增加psa特征融合，add by bo on 2023.8.29
+                   ASFF_newCA_2, ASFF_newCA_3,
+                   AUFPN_fusion_2, AUFPN_fusion_3, AUFPN_fusion_4}:   # afpn增加psa特征融合，add by bo on 2023.8.29
             c2 = args[0]
             if c2 != no:  # if not output
                 c2 = make_divisible(c2 * gw, 8)
