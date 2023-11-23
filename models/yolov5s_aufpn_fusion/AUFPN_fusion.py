@@ -454,8 +454,8 @@ class AUFPN_fusion_2(nn.Module):
         self.conv_2 = Conv(self.inter_dim * 2, self.inter_dim * 2, 3, 1)
         self.cot_2 = CoTBottleneck(self.inter_dim * 2, self.inter_dim * 2, shortcut=True, g=1, e=1.0)
         self.conv_sample = Conv(self.inter_dim*2, self.inter_dim, 3, 1)
-        self.sk2 = SKAttention2(self.inter_dim)
-        self.sa = ShuffleAttention(self.inter_dim*2)
+        # self.sk2 = SKAttention2(self.inter_dim)
+        # self.sa = ShuffleAttention(self.inter_dim*2)
 
 
     def forward(self, x):
@@ -522,8 +522,8 @@ class AUFPN_fusion_3(nn.Module):
         self.conv_sample = Conv(self.inter_dim * 3, self.inter_dim, 3, 1)
         self.conv_3 = Conv(self.inter_dim * 3, self.inter_dim*3, 3, 1)
         self.cot_3 = CoTBottleneck(self.inter_dim*3, self.inter_dim*3, shortcut=True, g=1, e=1.0)
-        self.sk3 = SKAttention3(self.inter_dim)
-        self.sa = ShuffleAttention(self.inter_dim * 3)
+        # self.sk3 = SKAttention3(self.inter_dim)
+        # self.sa = ShuffleAttention(self.inter_dim * 3)
         if self.level == 0:
             self.upsample4x = Upsample(channel[2], channel[0], scale_factor=4)
             self.upsample2x = Upsample(channel[1], channel[0], scale_factor=2)
