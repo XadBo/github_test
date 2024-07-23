@@ -313,11 +313,11 @@ def run(
     # Save JSON
     if save_json and len(jdict):
         w = Path(weights[0] if isinstance(weights, list) else weights).stem if weights is not None else ''  # weights
-        anno_json = str(Path('../datasets/coco/annotations/instances_val2017.json'))  # annotations
+        anno_json = str(Path('G:/VisDrone2019/Coco_VisDrone/annotations/VisDrone2019-DET_val_coco_start.json'))  # annotations
         pred_json = str(save_dir / f'{w}_predictions.json')  # predictions
         LOGGER.info(f'\nEvaluating pycocotools mAP... saving {pred_json}...')
         with open(pred_json, 'w') as f:
-            json.dump(jdict, f)
+            json.dump(jdict, f, ensure_ascii=False, indent=1)
 
         try:  # https://github.com/cocodataset/cocoapi/blob/master/PythonAPI/pycocoEvalDemo.ipynb
             check_requirements('pycocotools>=2.0.6')
@@ -367,7 +367,7 @@ def parse_opt():
     parser.add_argument('--save-txt', action='store_true', help='save results to *.txt')
     parser.add_argument('--save-hybrid', action='store_true', help='save label+prediction hybrid results to *.txt')
     parser.add_argument('--save-conf', action='store_true', help='save confidences in --save-txt labels')
-    parser.add_argument('--save-json', action='store_true', help='save a COCO-JSON results file')
+    parser.add_argument('--save-json', default=True, action='store_true', help='save a COCO-JSON results file')
     parser.add_argument('--project', default=ROOT / 'runs/val', help='save to project/name')
     parser.add_argument('--name', default='exp', help='save to project/name')
     parser.add_argument('--exist-ok', action='store_true', help='existing project/name ok, do not increment')
@@ -375,7 +375,7 @@ def parse_opt():
     parser.add_argument('--dnn', action='store_true', help='use OpenCV DNN for ONNX inference')
     opt = parser.parse_args()
     opt.data = check_yaml(opt.data)  # check YAML
-    opt.save_json |= opt.data.endswith('coco.yaml')
+    # opt.save_json |= opt.data.endswith('coco.yaml')
     opt.save_txt |= opt.save_hybrid
     print_args(vars(opt))
     return opt
